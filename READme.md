@@ -30,7 +30,7 @@ Installer la librairie grâce à composer <br>
 et mettre un évènement prePersist en place pour générer automatiquement le slug
 
 ### ✅ Rendre l'Entité unique avec Unique Entity
-Ajouter le tag Unique Entity sur l'entité concernée
-`#[UniqueEntity('nomdelapropriété')]`
+Ajouter le tag Unique Entity sur l'entité concernée <br>
+`#[UniqueEntity('nomdelapropriété')]` <br>
 On peut ajouter un message personnalisé.
 
