@@ -52,3 +52,8 @@ Puis lancer les fixtures <br>
 `php bin/console doctrine:fixtures:load` <br>
 Vérifier si les fixtures on été chargées en BDD.
 
+### ✅ Récupérer les articles
+Création du PostController et la méthode index. Dans le PostController, création d'une variable post qui permet de récupérer
+la totalité des post grâce au Repository. Utilisation de la méthode render afin de renvoyer les données à la vue.
+
+### ✅ Création d'une requête personnalisée
