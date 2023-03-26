@@ -28,3 +28,9 @@ Faire les migrations <br>
 Installer la librairie grâce à composer <br>
 `composer require cocur/slugify` <br>
 et mettre un évènement prePersist en place pour générer automatiquement le slug
+
+### ✅ Rendre l'Entité unique avec Unique Entity
+Ajouter le tag Unique Entity sur l'entité concernée
+`#[UniqueEntity('nomdelapropriété')]`
+On peut ajouter un message personnalisé.
+
