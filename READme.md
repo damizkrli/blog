@@ -57,3 +57,8 @@ Création du PostController et la méthode index. Dans le PostController, créat
 la totalité des post grâce au Repository. Utilisation de la méthode render afin de renvoyer les données à la vue.
 
 ### ✅ Création d'une requête personnalisée
+Création de la requête personnalisée dans le repository.
+
+### ✅ Installation de TailwindCSS
+Grâce à [Youri Galescot](https://www.yourigalescot.com/fr/blog/comment-integrer-tailwindcss-v3-a-un-projet-symfony-avec-webpack-encore)
+on a une roadmap bien rodé pour installer correctement TailwindCSS.
