@@ -56,6 +56,7 @@ class Post
         $this->updatedAt = new DateTimeImmutable();
     }
 
+    #[ORM\PrePersist]
     public function prePersist()
     {
         $this->slug = (new Slugify())->slugify($this->title);
