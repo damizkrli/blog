@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Post;
 
-use App\Repository\PostRepository;
+use App\Repository\Post\PostRepository;
 use Cocur\Slugify\Slugify;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
@@ -46,6 +46,9 @@ class Post
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\NotNull]
     private DateTimeImmutable $createdAt;
+
+    #[ORM\OneToOne(inversedBy: 'post', targetEntity: Thumbnail::class, cascade: ['persist', 'remove'])]
+    private Thumbnail $thumbnail;
 
     public function __construct()
     {
@@ -168,6 +171,19 @@ class Post
     public function __toString(): string
     {
         return $this->title;
+    }
+
+    public function getThumbnail(): ?Thumbnail
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * @param Thumbnail $thumbnail
+     */
+    public function setThumbnail(Thumbnail $thumbnail): void
+    {
+        $this->thumbnail = $thumbnail;
     }
 
 }
