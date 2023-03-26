@@ -39,3 +39,16 @@ Installer Vichuploader à l'aide de composer <br>
 `composer require vich/uploader-bundle` <br>
 Mettre en place le bundle dans une entité **Thumbnail** en relation avec une entité existante pour plus de cohérence (ex: Product => Thumbnail).
 Mettre à jour l'entité miroir. Supprimer les migrations pour avoir une seule et unique migration pour l'entité **Post**.
+
+### ✅ Mettre en place les fixtures
+Installer les fixtures et faker <br>
+`composer req orm-fixtures` <br>
+`composer req fakerphp/faker` <br>
+Renommer le fichier dans DataFixtures, et créer les fixtures dans EntitéFixtures. Se référer à la doc pour plus d'informations.
+Attention à bien annoter les champs obligatoires qui ne sont pas présents dans les fixtures avec
+> #[ORM\PrePersist] <br>
+
+Puis lancer les fixtures <br>
+`php bin/console doctrine:fixtures:load` <br>
+Vérifier si les fixtures on été chargées en BDD.
+
