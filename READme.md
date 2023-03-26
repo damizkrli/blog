@@ -34,3 +34,8 @@ Ajouter le tag Unique Entity sur l'entité concernée
 `#[UniqueEntity('nomdelapropriété')]`
 On peut ajouter un message personnalisé.
 
+### ### 🔥 Mise en place de VichUploader
+Installer Vichuploader à l'aide de composer <br>
+`composer require vich/uploader-bundle` <br>
+Mettre en place le bundle dans une entité **Thumbnail** en relation avec une entité existante pour plus de cohérence (ex: Product => Thumbnail).
+Mettre à jour l'entité miroir. Supprimer les migrations pour avoir une seule et unique migration pour l'entité **Post**.
