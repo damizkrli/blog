@@ -48,7 +48,7 @@ class Post
     private DateTimeImmutable $createdAt;
 
     #[ORM\OneToOne(inversedBy: 'post', targetEntity: Thumbnail::class, cascade: ['persist', 'remove'])]
-    private Thumbnail $thumbnail;
+    private ?Thumbnail $thumbnail = null;
 
     public function __construct()
     {
