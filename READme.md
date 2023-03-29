@@ -114,9 +114,12 @@ Intégrer les fichiers js de Tailwind elements dans app.js : <br>
 ``ìmport 'tw-elements''``
 
 ### ✅Créer les cards pour les posts
-Créer les cards. 
-Astuce : il est possbile de rajouter un 'u' dans les variables twig en installant le composant suivant : <br>
+Créer les cards.
+Astuce : il est possible de rajouter un 'u' dans les variables twig en installant le composant suivant : <br>
 ```
 composer require twig/string-extra
 ```
+
+### ✅Créer un composant
+Créer un composant pour réutiliser les cards.
 
