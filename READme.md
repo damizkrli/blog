@@ -173,4 +173,8 @@ Dans le fichier **index.html.twig** ajouter une div qui contient la pagination :
 
 ### ✅Retourner directement des articles paginés
 Au lieu de retourner des articles, puis de les paginer il est beaucoup plus logique de
-les paginer dans la requête du **repository**.
+les paginer dans la requête du **repository**. Au lieu d'avoir la logique de la pagination dans le repo
+on met tout dans le repository :
+```
+return $post = $this->paginator->paginate($data, $page, 9);
+```
