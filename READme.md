@@ -178,3 +178,7 @@ on met tout dans le repository :
 ```
 return $post = $this->paginator->paginate($data, $page, 9);
 ```
+
+### ✅Modifier le style de la pagination
+Pour modifier le style, on peut ajouter un style prédéfini dans <span style="color:blue">*/vendor/knplabs/knp-paginator-bundle/templates/Pagination/*</span>
+Ou alors on peut créer son propre design dans un dossier et l'appliquer dans le fichier de configuration de knp-paginator.
