@@ -61,7 +61,7 @@ la totalité des post grâce au Repository. Utilisation de la méthode render af
 ### ✅ Création d'une requête personnalisée
 Création de la requête personnalisée dans le repository.
 
-### ✅ Installation de TailwindCSS
+### 🔥 Installation de TailwindCSS
 Grâce à [Youri Galescot](https://www.yourigalescot.com/fr/blog/comment-integrer-tailwindcss-v3-a-un-projet-symfony-avec-webpack-encore)
 on a une roadmap bien rodé pour installer correctement TailwindCSS. <br>
 Installer Tailwind, postcss et autoprefixer <br>
@@ -123,7 +123,7 @@ composer require twig/string-extra
 ### ✅Créer un composant
 Créer un composant pour réutiliser les cards.
 
-### ✅Pagination avec KNP Paginator
+### 🔥 Pagination avec KNP Paginator
 Installer le bundle <br>
 ```composer require knplabs/knp-paginator-bundle``` <br>
 Mettre en place la pagination dans le controller : <br>
@@ -171,7 +171,7 @@ Dans le fichier **index.html.twig** ajouter une div qui contient la pagination :
 </div>
 ```
 
-### ✅Retourner directement des articles paginés
+### 🔥 Retourner directement des articles paginés
 Au lieu de retourner des articles, puis de les paginer il est beaucoup plus logique de
 les paginer dans la requête du **repository**. Au lieu d'avoir la logique de la pagination dans le repo
 on met tout dans le repository :
@@ -179,6 +179,12 @@ on met tout dans le repository :
 return $post = $this->paginator->paginate($data, $page, 9);
 ```
 
-### ✅Modifier le style de la pagination
+### 🔥 Modifier le style de la pagination
 Pour modifier le style, on peut ajouter un style prédéfini dans <span style="color:blue">*/vendor/knplabs/knp-paginator-bundle/templates/Pagination/*</span>
 Ou alors on peut créer son propre design dans un dossier et l'appliquer dans le fichier de configuration de knp-paginator.
+
+### 📝 Tester une page
+Pour créer un test fonctionnel il est possible de passer la console de symfony <br>
+```php bin/console make:test``` <br>
+Choisir le type de test et le nom de la classe à tester. Puis lancer le test. <br>
+```php bin/phpunit```
