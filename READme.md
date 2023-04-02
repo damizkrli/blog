@@ -170,3 +170,7 @@ Dans le fichier **index.html.twig** ajouter une div qui contient la pagination :
     {{ knp_pagination_render(posts) }}
 </div>
 ```
+
+### ✅Retourner directement des articles paginés
+Au lieu de retourner des articles, puis de les paginer il est beaucoup plus logique de
+les paginer dans la requête du **repository**.
