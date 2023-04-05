@@ -4,7 +4,6 @@
 
 {% block body %}
     <div class="container mx-auto">
-        <h1 class="text-5xl text-center mt-24 mb-8">Mon Blog</h1>
         <div class="flex flew-row flex-wrap justify-evenly mt-8">
             {% for post in posts %}
                 {% include '/components/_cards.html.twig' with { post: post } only %}

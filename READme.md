@@ -188,3 +188,4 @@ Pour créer un test fonctionnel il est possible de passer la console de symfony 
 ```php bin/console make:test``` <br>
 Choisir le type de test et le nom de la classe à tester. Puis lancer le test. <br>
 ```php bin/phpunit```
+
