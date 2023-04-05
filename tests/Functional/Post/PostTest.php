@@ -20,4 +20,26 @@ class PostTest extends WebTestCase
         $this->assertSelectorTextContains('h1', 'Blog');
 
     }
+
+    public function testPaginationWorks(): void
+    {
+        $client = static::createClient();
+        $crawler = $client->request(Request::METHOD_GET, '/');
+
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+
+        $post = $crawler->filter('div.card');
+        $this->assertEquals(9, $post);
+
+        $link = $crawler->selectLink('2')->extract(['href'])[0];
+        $crawler = $client->request(Request::METHOD_GET, $link);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+
+        $post = $crawler->filter('div.card');
+        $this->assertGreaterThanOrEqual(1, count($post));
+    }
 }
