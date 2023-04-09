@@ -69,4 +69,83 @@ class PostTest extends WebTestCase
         $this->assertRouteSame('post.index');
 
     }
+
+    public function testShareOnFacebookWorks(): void
+    {
+        $client = static::createClient();
+
+        /** @var $urlGeneratorInterface */
+        $urlGeneratorInterface = $client->getContainer()->get('router');
+
+        /** @var $entityManagerInterface */
+        $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        /** @var $postRepository */
+        $postRepository = $entityManager->getRepository(Post::class);
+
+        /** @var $post */
+        $post = $postRepository->findOneBy([]);
+
+        $postLink = $urlGeneratorInterface->generate('post.show', ['slug' => $post->getSlug()]);
+
+        $crawler = $client->request(
+            Request::METHOD_GET,
+            $postLink
+        );
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+
+        $link = $crawler->filter('.share.facebook')->link()->getUri();
+
+        $this->assertStringContainsString(
+            'https://www.facebook.com/sharer/sharer.php',
+            $link
+        );
+
+        $this->assertStringContainsString(
+            $postLink,
+            $link
+        );
+    }
+
+    public function testShareOnTwitterWorks(): void
+    {
+        $client = static::createClient();
+
+        /** @var $urlGeneratorInterface */
+        $urlGeneratorInterface = $client->getContainer()->get('router');
+
+        /** @var $entityManagerInterface */
+        $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        /** @var $postRepository */
+        $postRepository = $entityManager->getRepository(Post::class);
+
+        /** @var $post */
+        $post = $postRepository->findOneBy([]);
+
+        $postLink = $urlGeneratorInterface->generate('post.show', ['slug' => $post->getSlug()]);
+
+        $crawler = $client->request(
+            Request::METHOD_GET,
+            $postLink
+        );
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+
+        $link = $crawler->filter('.share.twitter')->link()->getUri();
+
+        $this->assertStringContainsString(
+            "https://twitter.com/intent/tweet",
+            $link
+        );
+
+        $this->assertStringContainsString(
+            $postLink,
+            $link
+        );
+    }
+
 }
