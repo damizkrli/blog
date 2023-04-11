@@ -5,6 +5,8 @@ namespace App\Entity\Post;
 use App\Repository\Post\PostRepository;
 use Cocur\Slugify\Slugify;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -50,10 +52,14 @@ class Post
     #[ORM\OneToOne(inversedBy: 'post', targetEntity: Thumbnail::class, cascade: ['persist', 'remove'])]
     private ?Thumbnail $thumbnail = null;
 
+    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'posts')]
+    private Collection $categories;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
+        $this->categories = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -169,11 +175,6 @@ class Post
         $this->createdAt = $createdAt;
     }
 
-    public function __toString(): string
-    {
-        return $this->title;
-    }
-
     public function getThumbnail(): ?Thumbnail
     {
         return $this->thumbnail;
@@ -185,6 +186,35 @@ class Post
     public function setThumbnail(Thumbnail $thumbnail): void
     {
         $this->thumbnail = $thumbnail;
+    }
+
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $category->removePost($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 
 }

@@ -232,7 +232,7 @@ Choisir le type de test et le nom de la classe à tester. Puis lancer le test. <
 ### ✅ Créer la page détail d'un article grâce au ParamConverter
 
 Dans la fonction show, au lieu de passer par le repository, on peut utiliser l'injection de dépendance en passant
-l'objet pour atteindre le slug et les informations dont on a besoin. C'est le ParamConverter : de manière automatique, 
+l'objet pour atteindre le slug et les informations dont on a besoin. C'est le ParamConverter : de manière automatique,
 Symfony comprend que l'on souhaite avoir accès à l'objet et à tous ses composants.
 
 ```
@@ -245,8 +245,10 @@ Symfony comprend que l'on souhaite avoir accès à l'objet et à tous ses compos
     }
 ```
 
-### ✅ Partager un article 
+### ✅ Partager un article
+
 Créer un bouton pour le réseau social souhaité : <br>
+
 ```
   <a href="https://www.facebook.com/sharer/sharer.php?u={{ absolute_url(path('post.show', {slug: post.slug})) }}"
        class="share facebook">
@@ -256,3 +258,35 @@ Créer un bouton pour le réseau social souhaité : <br>
     </a>
 ```
 
+### ✅ Relation ManyToMany enter 2 entités
+
+Création de la jointure entre les entités Posts et Category. Ajout des Fixtures. 
+
+Tout cela grâce à l'ArrayCollection qui va retourner les données sous forme de tableau PHP
+
+```
+$this->categories = new ArrayCollection();
+```
+
+Puis, création des fonctions d'ajout et de suppression des données grâce aux entités.
+
+```
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $category->removePost($this);
+        }
+
+        return $this;
+    }
+```
