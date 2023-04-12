@@ -290,3 +290,24 @@ Puis, création des fonctions d'ajout et de suppression des données grâce aux 
         return $this;
     }
 ```
+
+### ✅ Créer un composant pour badger les catégories
+Dans component, on créer *_badges.html.twig* qui contient le code suivant : <br>
+```
+{% if badges %}
+	<div class="badges flex justify-start my-1 flex-wrap">
+		{% for badge in badges %}
+			<span class="text-xs inline-block mr-2 mb-2 py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded-full">
+				<a href="{{ path('category.index', {slug: badge.slug}) }}">{{ badge.name }}</a>
+			</span>
+		{% endfor %}
+	</div>
+{% endif %}
+```
+On fait ensuite un **include** du component fraichement crée.
+```
+{% include "components/_badges.html.twig" with {
+    badges: post.categories
+} only %}
+```
+
