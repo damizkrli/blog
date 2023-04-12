@@ -12,6 +12,11 @@
                 {{ post.title|capitalize }}
             </h5>
         </a>
+
+        {% include "components/_badges.html.twig" with {
+            badges: post.categories
+        } only %}
+
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
             {{ post.content|u.truncate(160, '...') }}
         </p>
