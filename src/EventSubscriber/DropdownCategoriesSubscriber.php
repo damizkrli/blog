@@ -13,16 +13,15 @@ class DropdownCategoriesSubscriber implements EventSubscriberInterface
     const ROUTES = ['post.index', 'category.index'];
 
     public function __construct(
-        private readonly CategoryRepository $categoryRepository,
-        private readonly Environment $twig
-    )
-    {
+        private CategoryRepository $categoryRepository,
+        private Environment $twig
+    ) {
     }
 
     public function injectGlobalVariable(RequestEvent $event): void
     {
         $route = $event->getRequest()->get('_route');
-        if (in_array($route, DropdownCategoriesSubscriber::ROUTES)){
+        if (in_array($route, DropdownCategoriesSubscriber::ROUTES)) {
             $categories = $this->categoryRepository->findAll();
             $this->twig->addGlobal('allCategories', $categories);
         }
