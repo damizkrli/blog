@@ -21,7 +21,7 @@ yarn run dev --watch
 
 Créer l'environnement de test pour **Unit** mais aussi pour **Functional**
 Pour lancer les tests : <br>
-```php bin/phpunit```
+```php bin/phpunit --filter {NomDeLaMethode} {chemin/de/la/méthode.php}```
 
 ### ✅ Création de l'entité Post
 

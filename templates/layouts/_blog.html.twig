@@ -21,4 +21,20 @@
             {{ knp_pagination_render(posts) }}
         </div>
     </div>
+
+    <script>
+        let titleText = [
+            'Le',
+            "Blog",
+            "d'un",
+            'Inconnu'
+        ];
+        let counter = 0;
+
+        setInterval(function () {
+            document.title = titleText[counter % titleText.length];
+            counter++;
+        }, 2000)
+    </script>
+
 {% endblock %}

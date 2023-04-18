@@ -22,7 +22,7 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
 
         $categories = [];
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $category = new Category();
             $category
                 ->setName($faker->words(1, true) . ' ' . $i)
