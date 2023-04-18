@@ -4,9 +4,13 @@
 
 ```symfony new nomduprojet --webapp```
 
+---
+
 ### 🔥 Mise en place de Webpack
 
 ```composer require symfony/webpack-encore-bundle```
+
+---
 
 ### 🔽 Installation de Yarn et lancement du server web Symfony
 
@@ -17,11 +21,15 @@ symfony server:start
 yarn run dev --watch
 ```
 
+---
+
 ### 📝 Mise en place de l'environnement de test
 
 Créer l'environnement de test pour **Unit** mais aussi pour **Functional**
 Pour lancer les tests : <br>
 ```php bin/phpunit --filter {NomDeLaMethode} {chemin/de/la/méthode.php}```
+
+---
 
 ### ✅ Création de l'entité Post
 
@@ -31,17 +39,23 @@ Faire les migrations <br>
 ```console make:migration``` <br>
 ```console doctrine:migrations:migrate```
 
+---
+
 ### 🔥 Mise en place d'un Slug avec Cocur/Slugify
 
 Installer la librairie grâce à composer <br>
 ```composer require cocur/slugify``` <br>
 et mettre un évènement prePersist en place pour générer automatiquement le slug
 
+---
+
 ### ✅ Rendre l'Entité unique avec Unique Entity
 
 Ajouter le tag Unique Entity sur l'entité concernée
 ```#[UniqueEntity('nomdelapropriété')]```
 On peut ajouter un message personnalisé.
+
+---
 
 ### 🔥 Mise en place de VichUploader
 
@@ -50,6 +64,8 @@ Installer Vichuploader à l'aide de composer <br>
 Mettre en place le bundle dans une entité **Thumbnail** en relation avec une entité existante pour plus de cohérence (
 ex: Product => Thumbnail).
 Mettre à jour l'entité miroir. Supprimer les migrations pour avoir une seule et unique migration pour l'entité **Post**.
+
+---
 
 ### ✅ Mettre en place les fixtures
 
@@ -65,15 +81,21 @@ Puis lancer les fixtures <br>
 ```php bin/console doctrine:fixtures:load``` <br>
 Vérifier si les fixtures on été chargées en BDD.
 
+---
+
 ### ✅ Récupérer les articles
 
 Création du PostController et la méthode index. Dans le PostController, création d'une variable post qui permet de
 récupérer
 la totalité des post grâce au Repository. Utilisation de la méthode render afin de renvoyer les données à la vue.
 
+---
+
 ### ✅ Création d'une requête personnalisée
 
 Création de la requête personnalisée dans le repository.
+
+---
 
 ### 🔥 Installation de TailwindCSS
 
@@ -137,6 +159,8 @@ et l'ajouter comme plugin :
 Intégrer les fichiers js de Tailwind elements dans app.js : <br>
 ``ìmport 'tw-elements''``
 
+---
+
 ### ✅ Créer les cards pour les posts
 
 Créer les cards.
@@ -146,9 +170,13 @@ Astuce : il est possible de rajouter un 'u' dans les variables twig en installan
 composer require twig/string-extra
 ```
 
+---
+
 ### ✅ Créer un composant
 
 Créer un composant pour réutiliser les cards.
+
+---
 
 ### 🔥 Pagination avec KNP Paginator
 
@@ -203,6 +231,8 @@ Dans le fichier **index.html.twig** ajouter une div qui contient la pagination :
 </div>
 ```
 
+---
+
 ### 🔥 Retourner directement des articles paginés
 
 Au lieu de retourner des articles, puis de les paginer il est beaucoup plus logique de
@@ -213,12 +243,16 @@ on met tout dans le repository :
 return $post = $this->paginator->paginate($data, $page, 9);
 ```
 
+---
+
 ### 🔥 Modifier le style de la pagination
 
 Pour modifier le style, on peut ajouter un style prédéfini dans <span style="color:blue">
 */vendor/knplabs/knp-paginator-bundle/templates/Pagination/*</span>
 Ou alors on peut créer son propre design dans un dossier et l'appliquer dans le fichier de configuration de
 knp-paginator.
+
+---
 
 ### 📝 Tester une page
 
@@ -227,7 +261,11 @@ Pour créer un test fonctionnel, il est possible de passer la console de symfony
 Choisir le type de test et le nom de la classe à tester. Puis lancer le test. <br>
 ```php bin/phpunit```
 
+---
+
 ### ✅ Ajouter un Header et un footer
+
+---
 
 ### ✅ Créer la page détail d'un article grâce au ParamConverter
 
@@ -245,6 +283,8 @@ Symfony comprend que l'on souhaite avoir accès à l'objet et à tous ses compos
     }
 ```
 
+---
+
 ### ✅ Partager un article
 
 Créer un bouton pour le réseau social souhaité : <br>
@@ -257,6 +297,8 @@ Créer un bouton pour le réseau social souhaité : <br>
         </svg>
     </a>
 ```
+
+---
 
 ### ✅ Relation ManyToMany enter 2 entités
 
@@ -291,6 +333,8 @@ Puis, création des fonctions d'ajout et de suppression des données grâce aux 
     }
 ```
 
+---
+
 ### ✅ Créer un composant pour badger les catégories
 Dans component, on créer *_badges.html.twig* qui contient le code suivant : <br>
 ```
@@ -311,4 +355,18 @@ On fait ensuite un **include** du component fraichement crée.
 } only %}
 ```
 
+
 ### Créer un dropdown avec un EventSubscriber
+
+---
+
+### ✅ Mettre en place un systeme de Tags
+On peut copier/coller la classe Category qui ressemble au Tag. On peut aussi utiliser le system de Trait.
+C'est un mécanisme de réutilisation de code. Dans notre cas, les entités Tag et Category ont des propriétés en commun
+qu'il est possible de rassembler dans une seule et même classe. Pour utiliser le Trait, il suffit de l'utiliser avec 
+le **use** dans chacune des classes qui a besoin du Trait.
+
+```use CategoryTagTrait;```
+
+---
+
