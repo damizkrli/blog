@@ -3,9 +3,12 @@
 namespace App\Tests\Functional\Post;
 
 use App\Entity\Post\Post;
+use App\Repository\Post\PostRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PostTest extends WebTestCase
 {
@@ -148,4 +151,33 @@ class PostTest extends WebTestCase
         );
     }
 
+    public function testCategoriesAreDisplay(): void
+    {
+        $client = static::createClient();
+
+        /** @var UrlGeneratorInterface $client */
+        $urlGeneratorInterface = $client->getContainer()->get('router');
+
+        /** @var EntityManagerInterface $client */
+        $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        /** @var PostRepository $entityManager */
+        $postRepository = $entityManager->getRepository(Post::class);
+
+        /** @var Post $post */
+        $post = $postRepository->findOneBy([]);
+
+        $crawler = $client->request(
+            Request::METHOD_GET,
+            $urlGeneratorInterface->generate('post.show', ['slug' => $post->getSlug()])
+        );
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+
+        if (!$post->getCategories()->isEmpty()) {
+            $badges = $crawler->filter('.badges')->children();
+            $this->assertGreaterThanOrEqual(1, count($badges));
+        }
+    }
 }

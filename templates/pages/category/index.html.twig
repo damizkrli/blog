@@ -1,5 +1,5 @@
 {% include 'layouts/_blog.html.twig' with {
-    title: "Catégories : " ~ category.name,
+    title: "Catégorie : " ~ category.name|capitalize,
     posts: posts
 }
 %}
